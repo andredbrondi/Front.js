@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Reserva</title>
+    <script>
+        var horariosSelecionados = {};
+
+        function enviarFormulario() {
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var dia = document.getElementById('dia').value;
+            var horario = document.getElementById('horario').value;
+
+            if (horariosSelecionados[dia] && horariosSelecionados[dia].includes(horario)) {
+                alert('Esse horário já foi escolhido para o dia selecionado. Por favor, escolha outro horário.');
+                return false;
+            }
+
+            if (!horariosSelecionados[dia]) {
+                horariosSelecionados[dia] = [];
+            }
+            horariosSelecionados[dia].push(horario);
+
+            alert('Nome: ' + nome + '\nE-mail: ' + email + '\nDia: ' + dia + '\nHorário: ' + horario);
+
+            document.getElementById('nome').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('dia').value = '';
+            document.getElementById('horario').value = '';
+
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <h1>Formulário de Reserva</h1>
+    <form onsubmit="return enviarFormulario()">
+        Nome: <input type="text" id="nome" required><br>
+        E-mail: <input type="email" id="email" required><br>
+        Dia: <input type="date" id="dia" required><br>
+        Horário: <input type="time" id="horario" required><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
